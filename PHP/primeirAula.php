@@ -1,0 +1,7 @@
+<?php
+
+system("clear");
+echo "\"
+
+>
+
