@@ -10,7 +10,6 @@ system("clear");
 echo "Esse é um programa para controle financeiro!\n";
 echo "Digite 1 para cadastrar um usuário ou 0 para sair: ";
 $cadastra = trim(fgets(STDIN));
-$col = "10";
 
 if("$cadastra" == "1")
 {
