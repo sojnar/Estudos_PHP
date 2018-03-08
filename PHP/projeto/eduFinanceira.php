@@ -20,23 +20,22 @@ if("$cadastra" == "1")
         $vet++;
         echo "$vet \n";
         $j=0;
-
-        echo "Digite o seu Nome: \n";
+        
+        system("clear");
+        echo "Digite o seu Nome: ";
         $array[$vet][$j] = trim(fgets(STDIN));
         $j++;
         
-        echo "Digite o Email: \n";
+        echo "Digite o Email: ";
         $array[$vet][$j] = trim(fgets(STDIN));
         $j++;
 
         echo "Digite o Usuário: ";
         $array[$vet][$j] = trim(fgets(STDIN));
         $j++;
-        echo "\n";
 
         echo "Digite a Senha: ";
         $array[$vet][$j] = trim(fgets(STDIN));
-        echo "\n";
 
         echo "Digite 1 para cadastrar um usuário ou 0 para sair: ";
         $cadastra = trim(fgets(STDIN));
@@ -51,10 +50,15 @@ if("$cadastra" == "1")
 
 for ($i=1;$i<=$vet;$i++)
 {
+  echo "################";
+  echo "\nCadastro $i:\n";
+
     for ($j=0;$j<=3;$j++)
     {
       echo "{$array[$i][$j]} \n";
     }
+  echo "################\n";
+  echo "\n";
 }
 
 ?>
