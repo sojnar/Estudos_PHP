@@ -53,6 +53,7 @@ if($cadastra == "1")
 
 if ($cadastra == 2)
 {
+    system("clear");
     echo "Digite o seu login: ";
     $login = trim(fgets(STDIN));
     
@@ -66,9 +67,19 @@ if ($cadastra == 2)
           
           if($array[$i][3] == $senha)
           {
-            $i=$vet;
-            echo "Faça";
-            system(pause);
+            //$i=$vet;
+            system("clear");
+            echo "Ola! Confira seus dados cadastrais! \n";
+            echo "Nome: {$array[$i][0]} \n";
+            echo "Email: {$array[$i][1]}\n";
+            echo "login: {$array[$i][2]}\n";
+            echo "#########################################";
+            echo "#########################################";
+            echo "Escolha o tipo da transação: \n";
+            echo "Digite 1 para deposito ou 2 para saque: ";
+            $transacao = trim(fgets(STDIN));
+          
+            sleep(5);
           }else{
             echo "Senha incorreta!";
           }
@@ -81,9 +92,6 @@ if ($cadastra == 2)
         }
     }while($i < $vet);
 }
-
-
-//}
 
 print_r($array);
 
