@@ -6,10 +6,9 @@
 
 //Funcao para regitro de senha oculta
 function getPassword(){
-  $oldStyle = shell_exec('stty -g');
   shell_exec('stty -echo');
   $password = trim(fgets(STDIN));
-  shell_exec('stty ' . $oldStyle);
+  shell_exec('stty echo');
   return $password;
 }
 
@@ -44,31 +43,45 @@ do{
         echo "Digite o Email: ";
         $array[$vet][$j] = trim(fgets(STDIN));
         $j++;
-                      
+
+      /*  do{
           echo "Digite o Usuário: ";
-          $array[$vet][$j] = trim(fgets(STDIN));
-          $j++;
-
-          do{
-          /*Validação de senha do usuario, essa validação é precessada na função 
-          getPassword */
-            echo "Digite a Senha: ";
-            $array[$vet][$j] = getPassword();
-            echo "\nRepita a Senha: ";
-            $valida = getPassword();
-
-              if($array[$vet][$j] == $valida){
+          for($i=1;$i<=$vet;$i++){
+            $login = trim(fgets(STDIN));
+            if($login == $array[$i][$i]){
+              $valida = 0;
+            }else{
+              $array[$vet][$j] = $login;
               $valida = 1;
-              }else{
-                system("clear");
-                echo "Senha incorreta, vamos tentar novamente!\n";
-                echo "Nome: ".$array[$vet][0];
-                echo "\nE-mail: ".$array[$vet][1];
-                echo "\nLogin: ".$array[$vet][2];
-                echo "\n";
-                $valida = 0;
-              }
-          }while($valida == 0);
+            }
+          } 
+        }while($valida == 0);
+       */
+        
+        echo "Digite o Usuário: ";
+        $array[$vet][$j] = trim(fgets(STDIN));
+        $j++;
+
+        do{
+        /*Validação de senha do usuario, essa validação é precessada na função 
+        getPassword */
+          echo "Digite a Senha: ";
+          $array[$vet][$j] = getPassword();
+          echo "\nRepita a Senha: ";
+          $valida = getPassword();
+
+          if($array[$vet][$j] == $valida){
+            $valida = 1;
+          }else{
+            system("clear");
+            echo "Senha incorreta, vamos tentar novamente!\n";
+            echo "Nome: ".$array[$vet][0];
+            echo "\nE-mail: ".$array[$vet][1];
+            echo "\nLogin: ".$array[$vet][2];
+            echo "\n";
+            $valida = 0;
+          }
+        }while($valida == 0);
 
           //Verificação do menu cadastrar 
           echo "\nDigite 1 para cadastrar um usuário ou 0 para sair: ";
@@ -100,8 +113,6 @@ do{
           //Validação da senha digitada pelo usuário       
           if($array[$i][3] == $senha)
           {
-            echo "$i";
-            sleep(10);
             system("clear");
             echo "Ola! Confira seus dados cadastrais! \n";
             echo "Nome: {$array[$i][0]} \n";
@@ -115,23 +126,22 @@ do{
             $transacao = trim(fgets(STDIN));
             /*Definindo os tamanho da matriz da transação mes[12] dia[31] numero de
             * transações são infinitas
-            */
-            
+             */
+
             $mes=12;
             $dia=31;
             $op=2;
+            
+
           }else{
             echo "\nSenha incorreta!";
             sleep(5);
           }
-          if($i > $vet)
-          {
-            echo "\nLogin Invalido! ";
-            sleep(5);
-          }
+        }else if($i == $vet)
+        {
+          echo "\nLogin Invalido! ";
+          sleep(5);
         }
-
-      $i++;
     }
   }  
 
