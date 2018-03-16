@@ -15,6 +15,8 @@ function getPassword(){
 //Declarando o tamanho do meu vetor matriz vetor[10][3]
 $col = "10";
 $vet = "0";
+$mes=12;
+$dia=31;
 
 do{
 
@@ -118,20 +120,34 @@ do{
             echo "Nome: {$array[$i][0]} \n";
             echo "Email: {$array[$i][1]}\n";
             echo "login: {$array[$i][2]}\n";
-            echo "#########################################\n";
-            echo "#########################################\n";
+            echo "\n";
             echo "Escolha o tipo da transação: \n";
             //Menu de transação com validação da opção escolhida
             echo "Digite 1 para deposito ou 2 para saque: ";
             $transacao = trim(fgets(STDIN));
+            $id=$array[$i][2];
             /*Definindo os tamanho da matriz da transação mes[12] dia[31] numero de
             * transações são infinitas
              */
-
-            $mes=12;
-            $dia=31;
-            $op=2;
-            
+                $j=0;
+                if($transacao == 1)
+                {
+                  do{
+                      
+                      $op=$transacao; 
+                      echo "Digite o dia do deposito: ";
+                      $entraDia = trim(fgets(STDIN));
+                      echo "Digite o mes: ";
+                      $entraMes = trim(fgets(STDIN));
+                      echo "Digite o Valor do Deposito: ";
+                      $valor = trim(fgets(STDIN));
+                      $banco[$id][$op][$entraDia][$entraMes][$j] = $valor;
+                      echo "Digite 1 para castrar um deposito ou 0 para sair: ";
+                      $sair = trim(fgets(STDIN));
+                      $j++;
+                      print_r($banco);
+                    }while($sair == 1);     
+                }   
 
           }else{
             echo "\nSenha incorreta!";
