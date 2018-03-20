@@ -12,11 +12,37 @@ function getPassword(){
   return $password;
 }
 
+function getOpera(){
+  $op = array(
+    '1' => 'Deposito',
+    '2' => 'Saque'
+  );
+  return $op;
+}
+
+function getCalendario(){
+  $mes = array(
+    '1' => 'Jan',
+    '2' => 'Fev',
+    '3' => 'Mar',
+    '4' => 'Abr',
+    '5' => 'Mai',
+    '6' => 'Jun',
+    '7' => 'Jul',
+    '8' => 'Ago',
+    '9' => 'Set',
+    '10' => 'Out',
+    '11' => 'Nov',
+    '12' => 'Dez'
+  );
+  return $mes;
+}
+
 //Declarando o tamanho do meu vetor matriz vetor[10][3]
 $col = "10";
 $vet = "0";
-$mes=12;
-$dia=31;
+$mes = getCalendario();
+$op = getOpera();
 
 do{
 
@@ -46,20 +72,6 @@ do{
         $array[$vet][$j] = trim(fgets(STDIN));
         $j++;
 
-      /*  do{
-          echo "Digite o Usuário: ";
-          for($i=1;$i<=$vet;$i++){
-            $login = trim(fgets(STDIN));
-            if($login == $array[$i][$i]){
-              $valida = 0;
-            }else{
-              $array[$vet][$j] = $login;
-              $valida = 1;
-            }
-          } 
-        }while($valida == 0);
-       */
-        
         echo "Digite o Usuário: ";
         $array[$vet][$j] = trim(fgets(STDIN));
         $j++;
@@ -85,14 +97,19 @@ do{
           }
         }while($valida == 0);
 
-          //Verificação do menu cadastrar 
-          echo "\nDigite 1 para cadastrar um usuário ou 0 para sair: ";
-          $cadastra = trim(fgets(STDIN));
+        //Verificação do menu cadastrar 
+        echo "\nDigite 1 para cadastrar um usuário ou 0 para sair: ";
+        $cadastra = trim(fgets(STDIN));
       }else
       {
         $cadastra = "0";
       }
+      if($cadastra == "0")
+      {
+        print_r($array);
+      }
     }while($cadastra == "1");
+    echo "\n";
 }
 
   if ($cadastra == 2)
@@ -111,7 +128,7 @@ do{
         {
           echo "Digite sua senha: ";
           $senha = getPassword();
-
+          
           //Validação da senha digitada pelo usuário       
           if($array[$i][3] == $senha)
           {
@@ -122,65 +139,72 @@ do{
             echo "login: {$array[$i][2]}\n";
             echo "\n";
             echo "Escolha o tipo da transação: \n";
+        
             //Menu de transação com validação da opção escolhida
             echo "Digite 1 para deposito ou 2 para saque: ";
             $transacao = trim(fgets(STDIN));
             $id=$array[$i][2];
+
             /*Definindo os tamanho da matriz da transação mes[12] dia[31] numero de
             * transações são infinitas
              */
-                $j=0;
                 if($transacao == 1)
                 {
                   do{
                       
-                      $op=$transacao; 
+                      $transacao; 
                       echo "Digite o dia do deposito: ";
                       $entraDia = trim(fgets(STDIN));
                       echo "Digite o mes: ";
                       $entraMes = trim(fgets(STDIN));
                       echo "Digite o Valor do Deposito: ";
                       $valor = trim(fgets(STDIN));
-                      $banco[$id][$op][$entraDia][$entraMes][$j] = $valor;
+                      $banco[$id][$op[$transacao]][$entraDia][$mes[$entraMes]][] = $valor;
                       echo "Digite 1 para castrar um deposito ou 0 para sair: ";
                       $sair = trim(fgets(STDIN));
-                      $j++;
-                      print_r($banco);
+                      if($sair == "0")
+                      {
+                        print_r($banco);
+                      }
+
                     }while($sair == 1);     
-                }   
+                }
+
+                if($transacao == 2)
+                {
+                  do{
+                      
+                      $transacao; 
+                      echo "Digite o dia do saque: ";
+                      $entraDia = trim(fgets(STDIN));
+                      echo "Digite o mes: ";
+                      $entraMes = trim(fgets(STDIN));
+                      echo "Digite o Valor do saque: ";
+                      $valor = trim(fgets(STDIN));
+                      $banco[$id][$op[$transacao]][$entraDia][$mes[$entraMes]][] = $valor;
+                      echo "Digite 1 para castrar um deposito ou 0 para sair: ";
+                      $sair = trim(fgets(STDIN));
+                      if($sair == "0")
+                      {
+                        print_r($banco);
+                      }   
+                    }while($sair == 1);     
+                }
 
           }else{
             echo "\nSenha incorreta!";
             sleep(5);
           }
-        }else if($i == $vet)
-        {
-          echo "\nLogin Invalido! ";
-          sleep(5);
         }
     }
   }  
-
-print_r($array);
-
-/*r ($i=1;$i<=$vet;$i++)
-{
-  echo "################";
-  echo "\nCadastro $i:\n";
-
-    for ($j=0;$j<=3;$j++)
-    {
-      echo "{$array[$i][$j]} \n";
-    }
-  echo "################\n";
   echo "\n";
-}
- */
 
 //  system(clear);
   echo "Digite 1 para efetuar mais uma transação ou 0 para sair: ";
   $sair = trim(fgets(STDIN));
 }while($sair == 1);
+//print_r($banco);
 ?>
 
 
